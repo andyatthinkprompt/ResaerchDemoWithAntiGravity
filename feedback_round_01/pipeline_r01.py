@@ -1,22 +1,13 @@
 """
 feedback_round_01/pipeline_r01.py
-Improved pipeline addressing all fb_r01.md feedback items:
-
-  1. Real metrics in abstract (metadata saved before DOCX generation)
-  2. 5-fold stratified CV with mean ± std
-  3. DummyClassifier baseline
-  4. LE restricted to tree models (DT, RF) only
-  5. Feature ablation: full vs chi2-selected (k=25)
-  6. RF hyperparameter tuning via GridSearchCV
-  7. Wilcoxon signed-rank statistical test between top models
-  8. Precision-Recall curves added
-  9. "nan" replaced with "—" in tables
-
-Usage:
-    python feedback_round_01/pipeline_r01.py
-    python feedback_round_01/pipeline_r01.py --smoke-test
+Improved pipeline addressing all fb_r01.md feedback items.
+Uses ASCII-safe logging (no emoji) to avoid Windows cp1252 encoding errors.
 """
 import os, sys, json, pickle, logging, argparse, warnings
+# Windows terminal encoding fix
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
 import numpy as np
 import pandas as pd
 from datetime import datetime
@@ -69,8 +60,10 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     datefmt="%H:%M:%S",
-    handlers=[logging.StreamHandler(sys.stdout),
-              logging.FileHandler(log_file, encoding="utf-8")],
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler(log_file, encoding="utf-8"),
+    ],
     force=True,
 )
 logger = logging.getLogger("pipeline_r01")
@@ -90,7 +83,7 @@ def _make_model(name: str, weighted: bool = False):
         "DecisionTree":      (DecisionTreeClassifier(class_weight=cw,
                                random_state=RANDOM_STATE), False),
         "RandomForest":      (RandomForestClassifier(n_estimators=100, class_weight=cw,
-                               random_state=RANDOM_STATE, n_jobs=-1), False),
+                               random_state=RANDOM_STATE, n_jobs=1), False),
         "kNN":               (KNeighborsClassifier(n_neighbors=5), True),
         "NaiveBayes":        (GaussianNB(), False),
     }
@@ -136,7 +129,7 @@ def build_matrix(smoke_test: bool = False):
 def run_experiment(model_name, encoding, imbalance,
                    X_train, y_train, X_test, y_test, feature_names):
     exp_id = f"{model_name}__{encoding}__{imbalance}"
-    logger.info(f"  ▶ {exp_id}")
+    logger.info(f"  >> {exp_id}")
 
     X_tr, y_tr = X_train.copy(), y_train.copy()
     weighted   = (imbalance == "ClassWeight" and _supports_class_weight(model_name))
@@ -146,7 +139,7 @@ def run_experiment(model_name, encoding, imbalance,
     if imbalance == "SMOTE" and model_name != "Baseline":
         smote = SMOTE(random_state=RANDOM_STATE)
         X_tr, y_tr = smote.fit_resample(X_tr, y_tr)
-        logger.info(f"    SMOTE → {len(y_tr)} rows ({y_tr.sum()} pos)")
+        logger.info(f"    SMOTE done. Training size: {len(y_tr)} ({y_tr.sum()} pos)")
 
     # Scale
     scaler = None
@@ -163,11 +156,11 @@ def run_experiment(model_name, encoding, imbalance,
     cv_X = scaler.fit_transform(X_train) if needs_scale else X_train
     cv    = StratifiedKFold(n_splits=N_CV_FOLDS, shuffle=True, random_state=RANDOM_STATE)
     cv_f1  = cross_val_score(clf_cv, cv_X, y_train, cv=cv,
-                              scoring="f1", n_jobs=-1)
+                              scoring="f1", n_jobs=1)
     cv_auc = cross_val_score(clf_cv, cv_X, y_train, cv=cv,
-                              scoring="roc_auc", n_jobs=-1)
+                              scoring="roc_auc", n_jobs=1)
     cv_rec = cross_val_score(clf_cv, cv_X, y_train, cv=cv,
-                              scoring="recall", n_jobs=-1)
+                              scoring="recall", n_jobs=1)
 
     # ── Train final model ──────────────────────────────────────────
     clf.fit(X_tr_s, y_tr)
@@ -209,9 +202,10 @@ def run_experiment(model_name, encoding, imbalance,
     }
 
     logger.info(
-        f"  ✔ {exp_id}  "
-        f"F1={result['F1']}  AUC={result['ROC_AUC']}  "
-        f"CV_F1={result['CV_F1_mean']}±{result['CV_F1_std']}"
+        f"  OK {exp_id}  "
+        f"Acc={result['Accuracy']:.4f} Prec={result['Precision']:.4f} "
+        f"Rec={result['Recall']:.4f} F1={result['F1']:.4f} "
+        f"AUC={result['ROC_AUC']} | CV_F1={result['CV_F1_mean']}+/-{result['CV_F1_std']}"
     )
 
     # ── Save model immediately (fb_r01 implementation) ────────────
@@ -224,8 +218,9 @@ def run_experiment(model_name, encoding, imbalance,
     csv_path = os.path.join(TABLES_DIR, "model_comparison_r01.csv")
     row_cols  = {k: v for k, v in result.items() if not k.startswith("_")}
     row_df    = pd.DataFrame([row_cols])
-    row_df.to_csv(csv_path, mode="a", index=False,
-                  header=not os.path.exists(csv_path))
+    # Only write header if file is truly missing (NOT just empty or has duplicate headers)
+    file_exists = os.path.exists(csv_path) and os.path.getsize(csv_path) > 0
+    row_df.to_csv(csv_path, mode="a", index=False, header=not file_exists)
 
     return result
 
@@ -235,23 +230,40 @@ def run_experiment(model_name, encoding, imbalance,
 # ══════════════════════════════════════════════════════════════════════════════
 
 def tune_random_forest(X_train, y_train, needs_scale=False):
-    """GridSearchCV on a small RF grid. Returns best estimator."""
-    logger.info("  [RF Tuning] GridSearchCV starting...")
-    param_grid = {
-        "n_estimators": [50, 100, 200],
-        "max_depth":    [None, 10, 20],
-        "min_samples_leaf": [1, 5],
-    }
+    """Manual RF hyperparameter search (avoids numpy GridSearchCV StrDType bug on Windows)."""
+    logger.info("  [RF Tuning] Manual grid search starting...")
+    param_grid = [
+        {"n_estimators": n, "max_depth": d, "min_samples_leaf": m}
+        for n in [100, 200]
+        for d in [None, 10]
+        for m in [1, 5]
+    ]
     scaler = StandardScaler() if needs_scale else None
     X_s = scaler.fit_transform(X_train) if scaler else X_train
 
     cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=RANDOM_STATE)
-    base = RandomForestClassifier(random_state=RANDOM_STATE, n_jobs=-1)
-    gs = GridSearchCV(base, param_grid, cv=cv, scoring="roc_auc",
-                       n_jobs=-1, verbose=0)
-    gs.fit(X_s, y_train)
-    logger.info(f"  [RF Tuning] Best params: {gs.best_params_}  AUC={gs.best_score_:.4f}")
-    return gs.best_estimator_, gs.best_params_, scaler
+    best_score, best_params, best_model = -1, None, None
+
+    for params in param_grid:
+        clf = RandomForestClassifier(random_state=RANDOM_STATE, n_jobs=1, **params)
+        fold_aucs = []
+        for tr_idx, val_idx in cv.split(X_s, y_train):
+            clf.fit(X_s[tr_idx], y_train[tr_idx])
+            prob = clf.predict_proba(X_s[val_idx])[:, 1]
+            try:
+                fold_aucs.append(roc_auc_score(y_train[val_idx], prob))
+            except Exception:
+                fold_aucs.append(0.0)
+        mean_auc = float(np.mean(fold_aucs))
+        logger.info(f"    params={params}  CV_AUC={mean_auc:.4f}")
+        if mean_auc > best_score:
+            best_score = mean_auc
+            best_params = params
+            best_model = clf
+
+    logger.info(f"  [RF Tuning] Best params: {best_params}  AUC={best_score:.4f}")
+    final = RandomForestClassifier(random_state=RANDOM_STATE, n_jobs=1, **best_params)
+    return final, best_params, scaler
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -484,16 +496,16 @@ def plot_imbalance_impact(results):
 
 def main(smoke_test=False):
     logger.info("=" * 65)
-    logger.info("Pipeline R01 — Improved (feedback_round_01)")
+    logger.info("Pipeline R01 -- Improved (feedback_round_01)")
     mode_str = "SMOKE TEST" if smoke_test else "FULL"
     logger.info(f"Mode: {mode_str}")
     logger.info("=" * 65)
 
     # Clean stale CSV
     csv_path = os.path.join(TABLES_DIR, "model_comparison_r01.csv")
-    if os.path.exists(csv_path) and not smoke_test:
+    if os.path.exists(csv_path):
         os.remove(csv_path)
-
+        logger.info("Cleared stale model_comparison_r01.csv")
     # ── Data ────────────────────────────────────────────────────
     logger.info("\n[1/6] Download + Preprocess")
     raw_csv = download_dataset()
@@ -523,7 +535,7 @@ def main(smoke_test=False):
     all_results = []
 
     for i, (model_name, enc, imb) in enumerate(matrix, 1):
-        logger.info(f"── [{i}/{len(matrix)}] {model_name} | {enc} | {imb}")
+        logger.info(f"-- [{i}/{len(matrix)}] {model_name} | {enc} | {imb}")
         X, feat_names = enc_data[enc]
         try:
             r = run_experiment(
@@ -534,7 +546,7 @@ def main(smoke_test=False):
             )
             all_results.append(r)
         except Exception as e:
-            logger.error(f"  ✗ FAILED: {e}")
+            logger.info(f"  FAIL: {e}")
 
     # ── RF Hyperparameter Tuning ──────────────────────────────────
     if not smoke_test:
@@ -562,7 +574,7 @@ def main(smoke_test=False):
             "_feature_names": fn_ohe, "_cv_f1_folds": [], "_cv_auc_folds": [],
         }
         all_results.append(tuned_row)
-        logger.info(f"  Tuned RF → F1={tuned_row['F1']}  AUC={tuned_row['ROC_AUC']}")
+        logger.info(f"  Tuned RF -> F1={tuned_row['F1']}  AUC={tuned_row['ROC_AUC']}")
         logger.info(f"  Best params: {best_params}")
 
         # Save tuned model
@@ -637,7 +649,7 @@ def main(smoke_test=False):
     logger.info(f"  Metadata saved.")
 
     logger.info("\n" + "=" * 65)
-    logger.info(f"R01 Pipeline complete — {len(all_results)} experiments")
+    logger.info(f"R01 Pipeline complete -- {len(all_results)} experiments")
     logger.info(f"Best: {best_m['Model']} | {best_m['Encoding']} | "
                 f"{best_m['Imbalance']} | AUC={best_m['ROC_AUC']} F1={best_m['F1']}")
     logger.info("=" * 65)

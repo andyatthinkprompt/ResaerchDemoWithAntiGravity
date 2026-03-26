@@ -1,0 +1,113 @@
+22:22:16 [INFO] =================================================================
+22:22:16 [INFO] Pipeline R01 -- Improved (feedback_round_01)
+22:22:16 [INFO] Mode: FULL
+22:22:16 [INFO] =================================================================
+22:22:16 [INFO] Cleared stale model_comparison_r01.csv
+22:22:16 [INFO] 
+[1/6] Download + Preprocess
+22:22:16 [INFO] Dataset already exists at F:\thinkprompt\code\HieuNganThesis\data\raw\bank.csv, skipping download.
+22:22:16 [INFO] Loaded raw data: (41188, 21)
+22:22:16 [INFO] Removed 12 duplicate rows. Shape: (41176, 21)
+22:22:16 [INFO] Target distribution:
+y
+0    36537
+1     4639
+Name: count, dtype: int64
+22:22:17 [INFO] OHE features: 56, LE features: 19
+22:22:17 [INFO]   Rows=41176  Positive=11.27%
+22:22:17 [INFO] 
+[2/6] Feature engineering
+22:22:17 [INFO] Chi2 selected 25 features from 56
+22:22:17 [INFO] Correlation filter: dropped 2 features. Kept 17
+22:22:17 [INFO] 
+[3/6] Train/test split (80/20, stratified)
+22:22:17 [INFO] 
+[4/6] Running 24 experiments...
+
+22:22:17 [INFO] -- [1/24] Baseline | OHE | None
+22:22:17 [INFO]   >> Baseline__OHE__None
+22:22:17 [INFO]   OK Baseline__OHE__None  Acc=0.8873 Prec=0.0000 Rec=0.0000 F1=0.0000 AUC=0.5 | CV_F1=0.0+/-0.0
+22:22:17 [INFO] -- [2/24] LogisticRegression | OHE | None
+22:22:17 [INFO]   >> LogisticRegression__OHE__None
+22:22:19 [INFO]   OK LogisticRegression__OHE__None  Acc=0.8985 Prec=0.6554 Rec=0.2091 F1=0.3170 AUC=0.7997 | CV_F1=0.3405+/-0.0059
+22:22:19 [INFO] -- [3/24] DecisionTree | OHE | None
+22:22:19 [INFO]   >> DecisionTree__OHE__None
+22:22:22 [INFO]   OK DecisionTree__OHE__None  Acc=0.8440 Prec=0.3173 Rec=0.3341 F1=0.3255 AUC=0.6233 | CV_F1=0.3287+/-0.0153
+22:22:22 [INFO] -- [4/24] RandomForest | OHE | None
+22:22:22 [INFO]   >> RandomForest__OHE__None
+22:23:02 [INFO]   OK RandomForest__OHE__None  Acc=0.8925 Prec=0.5431 Rec=0.2920 F1=0.3798 AUC=0.781 | CV_F1=0.3737+/-0.0056
+22:23:02 [INFO] -- [5/24] kNN | OHE | None
+22:23:02 [INFO]   >> kNN__OHE__None
+22:23:08 [INFO]   OK kNN__OHE__None  Acc=0.8905 Prec=0.5289 Rec=0.2565 F1=0.3454 AUC=0.7265 | CV_F1=0.3551+/-0.0132
+22:23:08 [INFO] -- [6/24] NaiveBayes | OHE | None
+22:23:08 [INFO]   >> NaiveBayes__OHE__None
+22:23:09 [INFO]   OK NaiveBayes__OHE__None  Acc=0.8572 Prec=0.3885 Rec=0.4655 F1=0.4235 AUC=0.7757 | CV_F1=0.4178+/-0.0147
+22:23:09 [INFO] -- [7/24] DecisionTree | LE | None
+22:23:09 [INFO]   >> DecisionTree__LE__None
+22:23:11 [INFO]   OK DecisionTree__LE__None  Acc=0.8413 Prec=0.3187 Rec=0.3588 F1=0.3376 AUC=0.6345 | CV_F1=0.3263+/-0.0125
+22:23:11 [INFO] -- [8/24] RandomForest | LE | None
+22:23:11 [INFO]   >> RandomForest__LE__None
+22:23:47 [INFO]   OK RandomForest__LE__None  Acc=0.8935 Prec=0.5526 Rec=0.2888 F1=0.3793 AUC=0.7854 | CV_F1=0.3786+/-0.0126
+22:23:47 [INFO] -- [9/24] Baseline | OHE | ClassWeight
+22:23:47 [INFO]   >> Baseline__OHE__ClassWeight
+22:23:47 [INFO]   OK Baseline__OHE__ClassWeight  Acc=0.8873 Prec=0.0000 Rec=0.0000 F1=0.0000 AUC=0.5 | CV_F1=0.0+/-0.0
+22:23:47 [INFO] -- [10/24] LogisticRegression | OHE | ClassWeight
+22:23:47 [INFO]   >> LogisticRegression__OHE__ClassWeight
+22:23:49 [INFO]   OK LogisticRegression__OHE__ClassWeight  Acc=0.8312 Prec=0.3607 Rec=0.6444 F1=0.4625 AUC=0.7994 | CV_F1=0.4513+/-0.0084
+22:23:49 [INFO] -- [11/24] DecisionTree | OHE | ClassWeight
+22:23:49 [INFO]   >> DecisionTree__OHE__ClassWeight
+22:23:52 [INFO]   OK DecisionTree__OHE__ClassWeight  Acc=0.8462 Prec=0.3199 Rec=0.3244 F1=0.3221 AUC=0.6187 | CV_F1=0.3251+/-0.0085
+22:23:52 [INFO] -- [12/24] RandomForest | OHE | ClassWeight
+22:23:52 [INFO]   >> RandomForest__OHE__ClassWeight
+22:24:31 [INFO]   OK RandomForest__OHE__ClassWeight  Acc=0.8918 Prec=0.5372 Rec=0.2877 F1=0.3747 AUC=0.7803 | CV_F1=0.3636+/-0.0079
+22:24:31 [INFO] -- [13/24] kNN | OHE | ClassWeight
+22:24:31 [INFO]   >> kNN__OHE__ClassWeight
+22:24:37 [INFO]   OK kNN__OHE__ClassWeight  Acc=0.8905 Prec=0.5289 Rec=0.2565 F1=0.3454 AUC=0.7265 | CV_F1=0.3551+/-0.0132
+22:24:37 [INFO] -- [14/24] NaiveBayes | OHE | ClassWeight
+22:24:37 [INFO]   >> NaiveBayes__OHE__ClassWeight
+22:24:38 [INFO]   OK NaiveBayes__OHE__ClassWeight  Acc=0.8572 Prec=0.3885 Rec=0.4655 F1=0.4235 AUC=0.7757 | CV_F1=0.4178+/-0.0147
+22:24:38 [INFO] -- [15/24] DecisionTree | LE | ClassWeight
+22:24:38 [INFO]   >> DecisionTree__LE__ClassWeight
+22:24:40 [INFO]   OK DecisionTree__LE__ClassWeight  Acc=0.8477 Prec=0.3316 Rec=0.3459 F1=0.3386 AUC=0.6292 | CV_F1=0.3248+/-0.0132
+22:24:40 [INFO] -- [16/24] RandomForest | LE | ClassWeight
+22:24:40 [INFO]   >> RandomForest__LE__ClassWeight
+22:25:15 [INFO]   OK RandomForest__LE__ClassWeight  Acc=0.8932 Prec=0.5526 Rec=0.2716 F1=0.3642 AUC=0.7805 | CV_F1=0.3649+/-0.0139
+22:25:15 [INFO] -- [17/24] Baseline | OHE | SMOTE
+22:25:15 [INFO]   >> Baseline__OHE__SMOTE
+22:25:15 [INFO]   OK Baseline__OHE__SMOTE  Acc=0.8873 Prec=0.0000 Rec=0.0000 F1=0.0000 AUC=0.5 | CV_F1=0.0+/-0.0
+22:25:15 [INFO] -- [18/24] LogisticRegression | OHE | SMOTE
+22:25:15 [INFO]   >> LogisticRegression__OHE__SMOTE
+22:25:16 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+22:25:17 [INFO]   OK LogisticRegression__OHE__SMOTE  Acc=0.8289 Prec=0.3583 Rec=0.6552 F1=0.4632 AUC=0.7971 | CV_F1=0.3405+/-0.0059
+22:25:17 [INFO] -- [19/24] DecisionTree | OHE | SMOTE
+22:25:17 [INFO]   >> DecisionTree__OHE__SMOTE
+22:25:17 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+22:25:21 [INFO]   OK DecisionTree__OHE__SMOTE  Acc=0.8456 Prec=0.3280 Rec=0.3534 F1=0.3402 AUC=0.6338 | CV_F1=0.3287+/-0.0153
+22:25:21 [INFO] -- [20/24] RandomForest | OHE | SMOTE
+22:25:21 [INFO]   >> RandomForest__OHE__SMOTE
+22:25:21 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+22:26:04 [INFO]   OK RandomForest__OHE__SMOTE  Acc=0.8888 Prec=0.5104 Rec=0.3179 F1=0.3918 AUC=0.7763 | CV_F1=0.3737+/-0.0056
+22:26:04 [INFO] -- [21/24] kNN | OHE | SMOTE
+22:26:04 [INFO]   >> kNN__OHE__SMOTE
+22:26:04 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+22:26:11 [INFO]   OK kNN__OHE__SMOTE  Acc=0.7961 Prec=0.2920 Rec=0.5679 F1=0.3857 AUC=0.7361 | CV_F1=0.3551+/-0.0132
+22:26:11 [INFO] -- [22/24] NaiveBayes | OHE | SMOTE
+22:26:11 [INFO]   >> NaiveBayes__OHE__SMOTE
+22:26:11 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+22:26:12 [INFO]   OK NaiveBayes__OHE__SMOTE  Acc=0.8428 Prec=0.3654 Rec=0.5366 F1=0.4347 AUC=0.7719 | CV_F1=0.4178+/-0.0147
+22:26:12 [INFO] -- [23/24] DecisionTree | LE | SMOTE
+22:26:12 [INFO]   >> DecisionTree__LE__SMOTE
+22:26:12 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+22:26:14 [INFO]   OK DecisionTree__LE__SMOTE  Acc=0.8322 Prec=0.2854 Rec=0.3254 F1=0.3041 AUC=0.6136 | CV_F1=0.3263+/-0.0125
+22:26:14 [INFO] -- [24/24] RandomForest | LE | SMOTE
+22:26:14 [INFO]   >> RandomForest__LE__SMOTE
+22:26:14 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+22:26:54 [INFO]   OK RandomForest__LE__SMOTE  Acc=0.8905 Prec=0.5217 Rec=0.3362 F1=0.4089 AUC=0.7794 | CV_F1=0.3786+/-0.0126
+22:26:54 [INFO] 
+[5/6] RF Hyperparameter Tuning (OHE)
+22:26:54 [INFO]   [RF Tuning] GridSearchCV starting...
+22:30:16 [INFO]   [RF Tuning] Best params: {'max_depth': 10, 'min_samples_leaf': 5, 'n_estimators': 200}  AUC=0.7986
+22:30:19 [INFO]   Tuned RF -> F1=0.3448  AUC=0.8092
+22:30:19 [INFO]   Best params: {'max_depth': 10, 'min_samples_leaf': 5, 'n_estimators': 200}
+22:30:19 [INFO] 
+[5b/6] Wilcoxon significance test

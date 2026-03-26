@@ -1,0 +1,33 @@
+21:50:12 [INFO] =================================================================
+21:50:12 [INFO] Pipeline R01 — Improved (feedback_round_01)
+21:50:12 [INFO] Mode: FULL
+21:50:12 [INFO] =================================================================
+21:50:12 [INFO] 
+[1/6] Download + Preprocess
+21:50:12 [INFO] Dataset already exists at F:\thinkprompt\code\HieuNganThesis\data\raw\bank.csv, skipping download.
+21:50:12 [INFO] Loaded raw data: (41188, 21)
+21:50:12 [INFO] Removed 12 duplicate rows. Shape: (41176, 21)
+21:50:12 [INFO] Target distribution:
+y
+0    36537
+1     4639
+Name: count, dtype: int64
+21:50:13 [INFO] OHE features: 56, LE features: 19
+21:50:13 [INFO]   Rows=41176  Positive=11.27%
+21:50:13 [INFO] 
+[2/6] Feature engineering
+21:50:13 [INFO] Chi2 selected 25 features from 56
+21:50:13 [INFO] Correlation filter: dropped 2 features. Kept 17
+21:50:13 [INFO] 
+[3/6] Train/test split (80/20, stratified)
+21:50:13 [INFO] 
+[4/6] Running 24 experiments...
+
+21:50:13 [INFO] ── [1/24] Baseline | OHE | None
+21:50:13 [INFO]   ▶ Baseline__OHE__None
+21:50:19 [INFO]   ✔ Baseline__OHE__None  F1=0.0  AUC=0.5  CV_F1=0.0±0.0
+21:50:19 [INFO] ── [2/24] LogisticRegression | OHE | None
+21:50:20 [INFO]   ▶ LogisticRegression__OHE__None
+21:50:23 [INFO]   ✔ LogisticRegression__OHE__None  F1=0.317  AUC=0.7997  CV_F1=0.3405±0.0059
+21:50:23 [INFO] ── [3/24] DecisionTree | OHE | None
+21:50:23 [INFO]   ▶ DecisionTree__OHE__None
