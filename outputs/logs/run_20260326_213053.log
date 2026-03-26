@@ -1,0 +1,44 @@
+21:30:53 [INFO] ============================================================
+21:30:53 [INFO] Bank Marketing ML Pipeline
+21:30:53 [INFO] Mode: SMOKE TEST (1 experiment)
+21:30:53 [INFO] ============================================================
+21:30:53 [INFO] 
+[Step 1/5] Downloading dataset...
+21:30:53 [INFO] Dataset already exists at F:\thinkprompt\code\HieuNganThesis\data\raw\bank.csv, skipping download.
+21:30:53 [INFO] 
+[Step 2/5] Preprocessing...
+21:30:53 [INFO] Loaded raw data: (41188, 21)
+21:30:54 [INFO] Removed 12 duplicate rows. Shape: (41176, 21)
+21:30:54 [INFO] Target distribution:
+y
+0    36537
+1     4639
+Name: count, dtype: int64
+21:30:54 [INFO] OHE features: 56, LE features: 19
+21:30:55 [INFO]   Dataset shape: 41176 rows | Positive rate: 11.27% (4639 positives)
+21:30:55 [INFO] 
+[Step 3/5] Feature engineering...
+21:30:55 [INFO] Chi2 selected 25 features from 56
+21:30:55 [INFO] Correlation filter: dropped 2 features. Kept 17
+21:30:55 [INFO] 
+[Step 4/5] Train/test split (80/20, stratified, seed=42)...
+21:30:55 [INFO]   Train: 32940 | Test: 8236
+21:30:55 [INFO] 
+[Step 5/5] Running 1 experiment(s)...
+
+21:30:55 [INFO] ─── Experiment 1/1: LogisticRegression | OHE | None ───
+21:30:55 [INFO]   ▶ START  LogisticRegression__OHE__None
+21:30:55 [INFO]     Training LogisticRegression...
+21:30:55 [INFO]   ✔ DONE   LogisticRegression__OHE__None | Acc=0.8985 Prec=0.6554 Rec=0.2091 F1=0.3170 AUC=0.7997
+21:30:55 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\LogisticRegression__OHE__None.pkl
+21:30:55 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:30:55 [INFO] 
+[Visualization] Generating charts...
+21:30:55 [INFO] Saved chart: F:\thinkprompt\code\HieuNganThesis\outputs\charts\roc_curve.png
+21:30:55 [INFO]   (skipping multi-model charts — only 1 result so far)
+21:30:55 [INFO] Saved chart: F:\thinkprompt\code\HieuNganThesis\outputs\charts\confusion_matrix.png
+21:30:55 [INFO] 
+============================================================
+21:30:55 [INFO] Pipeline complete! 1/1 experiments succeeded.
+21:30:55 [INFO] Outputs: outputs/tables/ | outputs/charts/ | outputs/models/
+21:30:55 [INFO] ============================================================

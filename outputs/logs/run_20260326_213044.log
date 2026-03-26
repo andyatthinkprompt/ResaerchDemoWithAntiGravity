@@ -1,0 +1,16 @@
+21:30:44 [INFO] ============================================================
+21:30:44 [INFO] Bank Marketing ML Pipeline
+21:30:44 [INFO] Mode: SMOKE TEST (1 experiment)
+21:30:44 [INFO] ============================================================
+21:30:44 [INFO] 
+[Step 1/5] Downloading dataset...
+21:30:44 [INFO] Dataset already exists at F:\thinkprompt\code\HieuNganThesis\data\raw\bank.csv, skipping download.
+21:30:44 [INFO] 
+[Step 2/5] Preprocessing...
+21:30:44 [INFO] Loaded raw data: (41188, 21)
+21:30:44 [INFO] Removed 12 duplicate rows. Shape: (41176, 21)
+21:30:44 [INFO] Target distribution:
+y
+0    36537
+1     4639
+Name: count, dtype: int64

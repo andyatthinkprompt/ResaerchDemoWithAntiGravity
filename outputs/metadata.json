@@ -1,0 +1,30 @@
+{
+  "best_model": {
+    "Model": "LogisticRegression",
+    "Encoding": "OHE",
+    "Imbalance": "None",
+    "Accuracy": 0.8985,
+    "Precision": 0.6554,
+    "Recall": 0.2091,
+    "F1": 0.317,
+    "ROC_AUC": 0.7997
+  },
+  "dataset_shape": [
+    41176,
+    56
+  ],
+  "positive_rate": 0.11266271614532737,
+  "n_experiments": 30,
+  "top_features": [
+    "age",
+    "euribor3m",
+    "campaign",
+    "job",
+    "education",
+    "day_of_week",
+    "nr.employed",
+    "pdays",
+    "marital",
+    "poutcome"
+  ]
+}

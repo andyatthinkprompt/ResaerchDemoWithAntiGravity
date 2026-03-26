@@ -1,0 +1,240 @@
+21:33:16 [INFO] ============================================================
+21:33:16 [INFO] Bank Marketing ML Pipeline
+21:33:16 [INFO] Mode: FULL (36 experiments)
+21:33:16 [INFO] ============================================================
+21:33:16 [INFO] 
+[Step 1/5] Downloading dataset...
+21:33:16 [INFO] Dataset already exists at F:\thinkprompt\code\HieuNganThesis\data\raw\bank.csv, skipping download.
+21:33:16 [INFO] 
+[Step 2/5] Preprocessing...
+21:33:16 [INFO] Loaded raw data: (41188, 21)
+21:33:16 [INFO] Removed 12 duplicate rows. Shape: (41176, 21)
+21:33:16 [INFO] Target distribution:
+y
+0    36537
+1     4639
+Name: count, dtype: int64
+21:33:17 [INFO] OHE features: 56, LE features: 19
+21:33:17 [INFO]   Dataset shape: 41176 rows | Positive rate: 11.27% (4639 positives)
+21:33:17 [INFO] 
+[Step 3/5] Feature engineering...
+21:33:17 [INFO] Chi2 selected 25 features from 56
+21:33:17 [INFO] Correlation filter: dropped 2 features. Kept 17
+21:33:17 [INFO] 
+[Step 4/5] Train/test split (80/20, stratified, seed=42)...
+21:33:17 [INFO]   Train: 32940 | Test: 8236
+21:33:17 [INFO] 
+[Step 5/5] Running 30 experiment(s)...
+
+21:33:17 [INFO] ─── Experiment 1/30: LogisticRegression | OHE | None ───
+21:33:17 [INFO]   ▶ START  LogisticRegression__OHE__None
+21:33:17 [INFO]     Training LogisticRegression...
+21:33:17 [INFO]   ✔ DONE   LogisticRegression__OHE__None | Acc=0.8985 Prec=0.6554 Rec=0.2091 F1=0.3170 AUC=0.7997
+21:33:17 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\LogisticRegression__OHE__None.pkl
+21:33:17 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:17 [INFO] ─── Experiment 2/30: DecisionTree | OHE | None ───
+21:33:17 [INFO]   ▶ START  DecisionTree__OHE__None
+21:33:17 [INFO]     Training DecisionTree...
+21:33:18 [INFO]   ✔ DONE   DecisionTree__OHE__None | Acc=0.8440 Prec=0.3173 Rec=0.3341 F1=0.3255 AUC=0.6233
+21:33:18 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\DecisionTree__OHE__None.pkl
+21:33:18 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:18 [INFO] ─── Experiment 3/30: RandomForest | OHE | None ───
+21:33:18 [INFO]   ▶ START  RandomForest__OHE__None
+21:33:18 [INFO]     Training RandomForest...
+21:33:18 [INFO]   ✔ DONE   RandomForest__OHE__None | Acc=0.8925 Prec=0.5431 Rec=0.2920 F1=0.3798 AUC=0.781
+21:33:18 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\RandomForest__OHE__None.pkl
+21:33:18 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:18 [INFO] ─── Experiment 4/30: kNN | OHE | None ───
+21:33:18 [INFO]   ▶ START  kNN__OHE__None
+21:33:18 [INFO]     Training kNN...
+21:33:20 [INFO]   ✔ DONE   kNN__OHE__None | Acc=0.8905 Prec=0.5289 Rec=0.2565 F1=0.3454 AUC=0.7265
+21:33:20 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\kNN__OHE__None.pkl
+21:33:20 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:20 [INFO] ─── Experiment 5/30: NaiveBayes | OHE | None ───
+21:33:20 [INFO]   ▶ START  NaiveBayes__OHE__None
+21:33:20 [INFO]     Training NaiveBayes...
+21:33:20 [INFO]   ✔ DONE   NaiveBayes__OHE__None | Acc=0.8572 Prec=0.3885 Rec=0.4655 F1=0.4235 AUC=0.7757
+21:33:20 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\NaiveBayes__OHE__None.pkl
+21:33:20 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:20 [INFO] ─── Experiment 6/30: LogisticRegression | OHE | ClassWeight ───
+21:33:20 [INFO]   ▶ START  LogisticRegression__OHE__ClassWeight
+21:33:20 [INFO]     Training LogisticRegression...
+21:33:20 [INFO]   ✔ DONE   LogisticRegression__OHE__ClassWeight | Acc=0.8312 Prec=0.3607 Rec=0.6444 F1=0.4625 AUC=0.7994
+21:33:20 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\LogisticRegression__OHE__ClassWeight.pkl
+21:33:20 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:20 [INFO] ─── Experiment 7/30: DecisionTree | OHE | ClassWeight ───
+21:33:20 [INFO]   ▶ START  DecisionTree__OHE__ClassWeight
+21:33:20 [INFO]     Training DecisionTree...
+21:33:21 [INFO]   ✔ DONE   DecisionTree__OHE__ClassWeight | Acc=0.8462 Prec=0.3199 Rec=0.3244 F1=0.3221 AUC=0.6187
+21:33:21 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\DecisionTree__OHE__ClassWeight.pkl
+21:33:21 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:21 [INFO] ─── Experiment 8/30: RandomForest | OHE | ClassWeight ───
+21:33:21 [INFO]   ▶ START  RandomForest__OHE__ClassWeight
+21:33:21 [INFO]     Training RandomForest...
+21:33:21 [INFO]   ✔ DONE   RandomForest__OHE__ClassWeight | Acc=0.8918 Prec=0.5372 Rec=0.2877 F1=0.3747 AUC=0.7803
+21:33:21 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\RandomForest__OHE__ClassWeight.pkl
+21:33:21 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:21 [INFO] ─── Experiment 9/30: kNN | OHE | ClassWeight ───
+21:33:21 [INFO]   ▶ START  kNN__OHE__ClassWeight
+21:33:21 [INFO]     Training kNN...
+21:33:23 [INFO]   ✔ DONE   kNN__OHE__ClassWeight | Acc=0.8905 Prec=0.5289 Rec=0.2565 F1=0.3454 AUC=0.7265
+21:33:23 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\kNN__OHE__ClassWeight.pkl
+21:33:23 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:23 [INFO] ─── Experiment 10/30: NaiveBayes | OHE | ClassWeight ───
+21:33:23 [INFO]   ▶ START  NaiveBayes__OHE__ClassWeight
+21:33:23 [INFO]     Training NaiveBayes...
+21:33:23 [INFO]   ✔ DONE   NaiveBayes__OHE__ClassWeight | Acc=0.8572 Prec=0.3885 Rec=0.4655 F1=0.4235 AUC=0.7757
+21:33:23 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\NaiveBayes__OHE__ClassWeight.pkl
+21:33:23 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:23 [INFO] ─── Experiment 11/30: LogisticRegression | OHE | SMOTE ───
+21:33:23 [INFO]   ▶ START  LogisticRegression__OHE__SMOTE
+21:33:23 [INFO]     Applying SMOTE (minority→3711 samples)...
+21:33:23 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+21:33:23 [INFO]     Training LogisticRegression...
+21:33:24 [INFO]   ✔ DONE   LogisticRegression__OHE__SMOTE | Acc=0.8289 Prec=0.3583 Rec=0.6552 F1=0.4632 AUC=0.7971
+21:33:24 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\LogisticRegression__OHE__SMOTE.pkl
+21:33:24 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:24 [INFO] ─── Experiment 12/30: DecisionTree | OHE | SMOTE ───
+21:33:24 [INFO]   ▶ START  DecisionTree__OHE__SMOTE
+21:33:24 [INFO]     Applying SMOTE (minority→3711 samples)...
+21:33:24 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+21:33:24 [INFO]     Training DecisionTree...
+21:33:24 [INFO]   ✔ DONE   DecisionTree__OHE__SMOTE | Acc=0.8456 Prec=0.3280 Rec=0.3534 F1=0.3402 AUC=0.6338
+21:33:24 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\DecisionTree__OHE__SMOTE.pkl
+21:33:24 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:24 [INFO] ─── Experiment 13/30: RandomForest | OHE | SMOTE ───
+21:33:24 [INFO]   ▶ START  RandomForest__OHE__SMOTE
+21:33:24 [INFO]     Applying SMOTE (minority→3711 samples)...
+21:33:25 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+21:33:25 [INFO]     Training RandomForest...
+21:33:26 [INFO]   ✔ DONE   RandomForest__OHE__SMOTE | Acc=0.8888 Prec=0.5104 Rec=0.3179 F1=0.3918 AUC=0.7763
+21:33:26 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\RandomForest__OHE__SMOTE.pkl
+21:33:26 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:26 [INFO] ─── Experiment 14/30: kNN | OHE | SMOTE ───
+21:33:26 [INFO]   ▶ START  kNN__OHE__SMOTE
+21:33:26 [INFO]     Applying SMOTE (minority→3711 samples)...
+21:33:26 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+21:33:26 [INFO]     Training kNN...
+21:33:29 [INFO]   ✔ DONE   kNN__OHE__SMOTE | Acc=0.7961 Prec=0.2920 Rec=0.5679 F1=0.3857 AUC=0.7361
+21:33:29 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\kNN__OHE__SMOTE.pkl
+21:33:29 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:29 [INFO] ─── Experiment 15/30: NaiveBayes | OHE | SMOTE ───
+21:33:29 [INFO]   ▶ START  NaiveBayes__OHE__SMOTE
+21:33:29 [INFO]     Applying SMOTE (minority→3711 samples)...
+21:33:29 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+21:33:29 [INFO]     Training NaiveBayes...
+21:33:29 [INFO]   ✔ DONE   NaiveBayes__OHE__SMOTE | Acc=0.8428 Prec=0.3654 Rec=0.5366 F1=0.4347 AUC=0.7719
+21:33:29 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\NaiveBayes__OHE__SMOTE.pkl
+21:33:29 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:29 [INFO] ─── Experiment 16/30: LogisticRegression | LabelEnc | None ───
+21:33:29 [INFO]   ▶ START  LogisticRegression__LabelEnc__None
+21:33:29 [INFO]     Training LogisticRegression...
+21:33:29 [INFO]   ✔ DONE   LogisticRegression__LabelEnc__None | Acc=0.8985 Prec=0.6586 Rec=0.2058 F1=0.3136 AUC=0.7936
+21:33:29 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\LogisticRegression__LabelEnc__None.pkl
+21:33:29 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:29 [INFO] ─── Experiment 17/30: DecisionTree | LabelEnc | None ───
+21:33:29 [INFO]   ▶ START  DecisionTree__LabelEnc__None
+21:33:29 [INFO]     Training DecisionTree...
+21:33:29 [INFO]   ✔ DONE   DecisionTree__LabelEnc__None | Acc=0.8413 Prec=0.3187 Rec=0.3588 F1=0.3376 AUC=0.6345
+21:33:29 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\DecisionTree__LabelEnc__None.pkl
+21:33:29 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:29 [INFO] ─── Experiment 18/30: RandomForest | LabelEnc | None ───
+21:33:29 [INFO]   ▶ START  RandomForest__LabelEnc__None
+21:33:29 [INFO]     Training RandomForest...
+21:33:30 [INFO]   ✔ DONE   RandomForest__LabelEnc__None | Acc=0.8935 Prec=0.5526 Rec=0.2888 F1=0.3793 AUC=0.7854
+21:33:30 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\RandomForest__LabelEnc__None.pkl
+21:33:30 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:30 [INFO] ─── Experiment 19/30: kNN | LabelEnc | None ───
+21:33:30 [INFO]   ▶ START  kNN__LabelEnc__None
+21:33:30 [INFO]     Training kNN...
+21:33:30 [INFO]   ✔ DONE   kNN__LabelEnc__None | Acc=0.8952 Prec=0.5740 Rec=0.2716 F1=0.3687 AUC=0.7334
+21:33:30 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\kNN__LabelEnc__None.pkl
+21:33:30 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:30 [INFO] ─── Experiment 20/30: NaiveBayes | LabelEnc | None ───
+21:33:30 [INFO]   ▶ START  NaiveBayes__LabelEnc__None
+21:33:30 [INFO]     Training NaiveBayes...
+21:33:31 [INFO]   ✔ DONE   NaiveBayes__LabelEnc__None | Acc=0.8346 Prec=0.3446 Rec=0.5183 F1=0.4139 AUC=0.7697
+21:33:31 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\NaiveBayes__LabelEnc__None.pkl
+21:33:31 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:31 [INFO] ─── Experiment 21/30: LogisticRegression | LabelEnc | ClassWeight ───
+21:33:31 [INFO]   ▶ START  LogisticRegression__LabelEnc__ClassWeight
+21:33:31 [INFO]     Training LogisticRegression...
+21:33:31 [INFO]   ✔ DONE   LogisticRegression__LabelEnc__ClassWeight | Acc=0.8152 Prec=0.3352 Rec=0.6509 F1=0.4425 AUC=0.7935
+21:33:31 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\LogisticRegression__LabelEnc__ClassWeight.pkl
+21:33:31 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:31 [INFO] ─── Experiment 22/30: DecisionTree | LabelEnc | ClassWeight ───
+21:33:31 [INFO]   ▶ START  DecisionTree__LabelEnc__ClassWeight
+21:33:31 [INFO]     Training DecisionTree...
+21:33:31 [INFO]   ✔ DONE   DecisionTree__LabelEnc__ClassWeight | Acc=0.8477 Prec=0.3316 Rec=0.3459 F1=0.3386 AUC=0.6292
+21:33:31 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\DecisionTree__LabelEnc__ClassWeight.pkl
+21:33:31 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:31 [INFO] ─── Experiment 23/30: RandomForest | LabelEnc | ClassWeight ───
+21:33:31 [INFO]   ▶ START  RandomForest__LabelEnc__ClassWeight
+21:33:31 [INFO]     Training RandomForest...
+21:33:31 [INFO]   ✔ DONE   RandomForest__LabelEnc__ClassWeight | Acc=0.8932 Prec=0.5526 Rec=0.2716 F1=0.3642 AUC=0.7805
+21:33:31 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\RandomForest__LabelEnc__ClassWeight.pkl
+21:33:31 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:31 [INFO] ─── Experiment 24/30: kNN | LabelEnc | ClassWeight ───
+21:33:31 [INFO]   ▶ START  kNN__LabelEnc__ClassWeight
+21:33:31 [INFO]     Training kNN...
+21:33:32 [INFO]   ✔ DONE   kNN__LabelEnc__ClassWeight | Acc=0.8952 Prec=0.5740 Rec=0.2716 F1=0.3687 AUC=0.7334
+21:33:32 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\kNN__LabelEnc__ClassWeight.pkl
+21:33:32 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:32 [INFO] ─── Experiment 25/30: NaiveBayes | LabelEnc | ClassWeight ───
+21:33:32 [INFO]   ▶ START  NaiveBayes__LabelEnc__ClassWeight
+21:33:32 [INFO]     Training NaiveBayes...
+21:33:32 [INFO]   ✔ DONE   NaiveBayes__LabelEnc__ClassWeight | Acc=0.8346 Prec=0.3446 Rec=0.5183 F1=0.4139 AUC=0.7697
+21:33:32 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\NaiveBayes__LabelEnc__ClassWeight.pkl
+21:33:32 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:32 [INFO] ─── Experiment 26/30: LogisticRegression | LabelEnc | SMOTE ───
+21:33:32 [INFO]   ▶ START  LogisticRegression__LabelEnc__SMOTE
+21:33:32 [INFO]     Applying SMOTE (minority→3711 samples)...
+21:33:32 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+21:33:32 [INFO]     Training LogisticRegression...
+21:33:32 [INFO]   ✔ DONE   LogisticRegression__LabelEnc__SMOTE | Acc=0.8028 Prec=0.3184 Rec=0.6573 F1=0.4290 AUC=0.7914
+21:33:32 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\LogisticRegression__LabelEnc__SMOTE.pkl
+21:33:32 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:32 [INFO] ─── Experiment 27/30: DecisionTree | LabelEnc | SMOTE ───
+21:33:32 [INFO]   ▶ START  DecisionTree__LabelEnc__SMOTE
+21:33:32 [INFO]     Applying SMOTE (minority→3711 samples)...
+21:33:32 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+21:33:32 [INFO]     Training DecisionTree...
+21:33:33 [INFO]   ✔ DONE   DecisionTree__LabelEnc__SMOTE | Acc=0.8322 Prec=0.2854 Rec=0.3254 F1=0.3041 AUC=0.6136
+21:33:33 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\DecisionTree__LabelEnc__SMOTE.pkl
+21:33:33 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:33 [INFO] ─── Experiment 28/30: RandomForest | LabelEnc | SMOTE ───
+21:33:33 [INFO]   ▶ START  RandomForest__LabelEnc__SMOTE
+21:33:33 [INFO]     Applying SMOTE (minority→3711 samples)...
+21:33:33 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+21:33:33 [INFO]     Training RandomForest...
+21:33:34 [INFO]   ✔ DONE   RandomForest__LabelEnc__SMOTE | Acc=0.8905 Prec=0.5217 Rec=0.3362 F1=0.4089 AUC=0.7794
+21:33:34 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\RandomForest__LabelEnc__SMOTE.pkl
+21:33:34 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:34 [INFO] ─── Experiment 29/30: kNN | LabelEnc | SMOTE ───
+21:33:34 [INFO]   ▶ START  kNN__LabelEnc__SMOTE
+21:33:34 [INFO]     Applying SMOTE (minority→3711 samples)...
+21:33:34 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+21:33:34 [INFO]     Training kNN...
+21:33:35 [INFO]   ✔ DONE   kNN__LabelEnc__SMOTE | Acc=0.7952 Prec=0.2850 Rec=0.5420 F1=0.3736 AUC=0.7229
+21:33:35 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\kNN__LabelEnc__SMOTE.pkl
+21:33:35 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:35 [INFO] ─── Experiment 30/30: NaiveBayes | LabelEnc | SMOTE ───
+21:33:35 [INFO]   ▶ START  NaiveBayes__LabelEnc__SMOTE
+21:33:35 [INFO]     Applying SMOTE (minority→3711 samples)...
+21:33:35 [INFO]     SMOTE done. Training size: 58458 (29229 pos)
+21:33:35 [INFO]     Training NaiveBayes...
+21:33:35 [INFO]   ✔ DONE   NaiveBayes__LabelEnc__SMOTE | Acc=0.7462 Prec=0.2655 Rec=0.7091 F1=0.3864 AUC=0.7692
+21:33:35 [INFO]     Saved model → F:\thinkprompt\code\HieuNganThesis\outputs\models\NaiveBayes__LabelEnc__SMOTE.pkl
+21:33:35 [INFO]     Appended result → F:\thinkprompt\code\HieuNganThesis\outputs\tables\model_comparison.csv
+21:33:35 [INFO] 
+[Visualization] Generating charts...
+21:33:36 [INFO] Saved chart: F:\thinkprompt\code\HieuNganThesis\outputs\charts\roc_curve.png
+21:33:36 [INFO] Saved chart: F:\thinkprompt\code\HieuNganThesis\outputs\charts\model_performance.png
+21:33:36 [INFO] Saved chart: F:\thinkprompt\code\HieuNganThesis\outputs\charts\imbalance_impact.png
+21:33:36 [INFO] Saved chart: F:\thinkprompt\code\HieuNganThesis\outputs\charts\feature_importance.png
+21:33:36 [INFO] Saved chart: F:\thinkprompt\code\HieuNganThesis\outputs\charts\confusion_matrix.png
+21:33:36 [INFO] 
+============================================================
+21:33:36 [INFO] Pipeline complete! 30/30 experiments succeeded.
+21:33:36 [INFO] Outputs: outputs/tables/ | outputs/charts/ | outputs/models/
+21:33:36 [INFO] ============================================================
