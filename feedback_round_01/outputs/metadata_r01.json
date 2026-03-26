@@ -1,0 +1,27 @@
+{
+  "best_model": {
+    "Model": "LogisticRegression",
+    "Encoding": "OHE",
+    "Imbalance": "None",
+    "Accuracy": 0.8985,
+    "Precision": 0.6554,
+    "Recall": 0.2091,
+    "F1": 0.317,
+    "ROC_AUC": 0.7997,
+    "CV_F1_mean": 0.3405,
+    "CV_F1_std": 0.0059,
+    "CV_AUC_mean": 0.7901,
+    "CV_AUC_std": 0.0067,
+    "CV_Rec_mean": 0.2296,
+    "CV_Rec_std": 0.0051
+  },
+  "baseline": {},
+  "dataset_shape": [
+    41176,
+    56
+  ],
+  "positive_rate": 0.11266271614532737,
+  "n_experiments": 1,
+  "top_features": [],
+  "wilcoxon": []
+}

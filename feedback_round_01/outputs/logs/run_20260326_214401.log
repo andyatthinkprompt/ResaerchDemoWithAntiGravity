@@ -1,0 +1,14 @@
+21:44:01 [INFO] =================================================================
+21:44:01 [INFO] Pipeline R01 — Improved (feedback_round_01)
+21:44:01 [INFO] Mode: FULL
+21:44:01 [INFO] =================================================================
+21:44:01 [INFO] 
+[1/6] Download + Preprocess
+21:44:01 [INFO] Dataset already exists at F:\thinkprompt\code\HieuNganThesis\data\raw\bank.csv, skipping download.
+21:44:01 [INFO] Loaded raw data: (41188, 21)
+21:44:02 [INFO] Removed 12 duplicate rows. Shape: (41176, 21)
+21:44:02 [INFO] Target distribution:
+y
+0    36537
+1     4639
+Name: count, dtype: int64

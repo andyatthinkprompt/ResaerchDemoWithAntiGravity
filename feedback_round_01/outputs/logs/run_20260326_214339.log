@@ -1,0 +1,42 @@
+21:43:39 [INFO] =================================================================
+21:43:39 [INFO] Pipeline R01 — Improved (feedback_round_01)
+21:43:39 [INFO] Mode: SMOKE TEST
+21:43:39 [INFO] =================================================================
+21:43:39 [INFO] 
+[1/6] Download + Preprocess
+21:43:39 [INFO] Dataset already exists at F:\thinkprompt\code\HieuNganThesis\data\raw\bank.csv, skipping download.
+21:43:39 [INFO] Loaded raw data: (41188, 21)
+21:43:39 [INFO] Removed 12 duplicate rows. Shape: (41176, 21)
+21:43:39 [INFO] Target distribution:
+y
+0    36537
+1     4639
+Name: count, dtype: int64
+21:43:40 [INFO] OHE features: 56, LE features: 19
+21:43:40 [INFO]   Rows=41176  Positive=11.27%
+21:43:40 [INFO] 
+[2/6] Feature engineering
+21:43:40 [INFO] Chi2 selected 25 features from 56
+21:43:40 [INFO] Correlation filter: dropped 2 features. Kept 17
+21:43:40 [INFO] 
+[3/6] Train/test split (80/20, stratified)
+21:43:40 [INFO] 
+[4/6] Running 1 experiments...
+
+21:43:40 [INFO] ── [1/1] LogisticRegression | OHE | None
+21:43:40 [INFO]   ▶ LogisticRegression__OHE__None
+21:43:48 [INFO]   ✔ LogisticRegression__OHE__None  F1=0.317  AUC=0.7997  CV_F1=0.3405±0.0059
+21:43:48 [INFO] 
+[6/6] Generating charts
+21:43:48 [INFO]   Chart saved: roc_curve_r01.png
+21:43:49 [INFO]   Chart saved: pr_curve_r01.png
+21:43:49 [INFO]   Chart saved: cv_f1_comparison_r01.png
+21:43:49 [INFO]   Chart saved: model_performance_r01.png
+21:43:49 [INFO]   Chart saved: imbalance_impact_r01.png
+21:43:49 [INFO]   Chart saved: confusion_matrix_r01.png
+21:43:49 [INFO]   Metadata saved.
+21:43:49 [INFO] 
+=================================================================
+21:43:49 [INFO] R01 Pipeline complete — 1 experiments
+21:43:49 [INFO] Best: LogisticRegression | OHE | None | AUC=0.7997 F1=0.317
+21:43:49 [INFO] =================================================================
